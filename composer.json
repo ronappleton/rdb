@@ -1,0 +1,37 @@
+{
+  "name": "ronappleton/laravel-rdb",
+  "description": "Remote database connection utility for Lavavel/Lumen",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ronald Appleton",
+      "email": "ronald.appleton@visualsoft.co.uk"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "RonAppleton\\RDB\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "RonAppleton\\RDB\\ModuleServiceProvider"
+      ],
+      "aliases": {
+        "RDB": "RonAppleton\\RDB\\RDBFacade"
+      }
+    }
+  }
+}
