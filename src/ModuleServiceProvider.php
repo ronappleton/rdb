@@ -7,38 +7,20 @@ use Illuminate\Support\ServiceProvider;
 class ModuleServiceProvider extends ServiceProvider
 {
     /**
-     * The application instance.
-     *
-     * @var \Illuminate\Contracts\Foundation\Application
-     */
-    protected $app;
-
-    /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = true;
 
-
     /**
-     * Create a new service provider instance.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @return void
+     * Register our remote database library
      */
-    public function __construct($app)
-    {
-        parent::__construct($app);
-        $this->app = $app;
-    }
-
-    public function boot()
-    {
-    }
-
     public function register()
     {
+        $this->app->alias('RDB', RDBLibrary::class);
+
+        $this->registerRDBLibrary();
     }
 
     /**
@@ -46,10 +28,20 @@ class ModuleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerHtmlBuilder()
+    protected function registerRDBLibrary()
     {
         $this->app->bind('rdb', function () {
             return new RDBLibrary();
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['RDB', RDBLibrary::class];
     }
 }
